@@ -1,1 +1,0 @@
-# Cp-3-Yamamoto
