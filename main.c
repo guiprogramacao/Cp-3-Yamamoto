@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 void exibirMenu(){
     printf("\n====================\n");
@@ -27,58 +28,73 @@ return saldo;
 
 
 void consultarSaldo(float saldo) {
-printf("\n--- SALDO ATUAL ---\n");
-printf("R$ %.2f\n", saldo);
-printf("-------------------\n");
-system("pause");
+ printf("\n--- SALDO ATUAL ---\n");
+    printf("R$ %.2f\n", saldo);
+    printf("-------------------\n");
 }
 
 float realizarSaque(float saldo) {
 float valor;
 printf("Valor do saque: ");
 scanf("%f", &valor);
-if (valor <= saldo && valor > 0) {
-saldo -= valor;
-printf("Saque realizado!\n");
-} else {
-printf("Saldo insuficiente ou valor invalido!\n");
-}
-return saldo;
+    if (valor > 1000.00) {
+        printf("Limite diario excedido!\n");
+    } else if (valor > saldo) {
+        printf("Saldo insuficiente!\n");
+    } else if (valor > 0) {
+        saldo -= valor;
+        printf("Saque realizado!\n");
+    } else {
+        printf("Valor invalido!\n");
+    }
+
+    return saldo;
 }
 
 int main(){
 
     int opcao;
-    int saldo;
+    float saldo = 500.0;
+
     do {
-    system("cls");
-    exibirMenu();
-    scanf("%d", &opcao);
+
+        system("cls");
+
+        exibirMenu();
+        scanf("%d", &opcao);
+
+        while (getchar() != '\n');
+
+        switch(opcao) {
+
+            case 1:
+                consultarSaldo(saldo);
+                break;
+
+            case 2:
+                saldo = realizarSaque(saldo);
+                break;
+
+            case 3:
+                saldo = realizarDeposito(saldo);
+                break;
+
+            case 0:
+                printf("Saindo...\n");
+                break;
+
+            default:
+                printf("Opcao Invalida!\n");
+        }
+
+        printf("\nSaldo: R$ %.2f\n", saldo);
+
+        printf("\nPressione Enter para continuar...");
+        getchar();
+
     } while(opcao != 0);
+
     printf("Obrigado por usar nosso ATM!");
-    while (getchar() != '\n');
-    if (opcao < 0 || opcao > 3) {
-    printf("Opcao Invalida!\n");
-    }
 
-    switch(opcao) {
-    case 1:
-    consultarSaldo(saldo);
-    break;
-    case 2:
-    saldo = realizarSaque(saldo);
-    break;
-    case 3:
-    saldo = realizarDeposito(saldo);
-    break;
-    case 0:
-    printf("Saindo...\n");
-    break;
-    }
-
-
-
-    
     return 0;
 }
-
