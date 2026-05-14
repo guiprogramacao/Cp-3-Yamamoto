@@ -33,6 +33,18 @@ printf("-------------------\n");
 system("pause");
 }
 
+float realizarSaque(float saldo) {
+float valor;
+printf("Valor do saque: ");
+scanf("%f", &valor);
+if (valor <= saldo && valor > 0) {
+saldo -= valor;
+printf("Saque realizado!\n");
+} else {
+printf("Saldo insuficiente ou valor invalido!\n");
+}
+return saldo;
+}
 
 int main(){
 
@@ -49,6 +61,24 @@ int main(){
     printf("Opcao Invalida!\n");
     }
 
+    switch(opcao) {
+    case 1:
+    consultarSaldo(saldo);
+    break;
+    case 2:
+    saldo = realizarSaque(saldo);
+    break;
+    case 3:
+    saldo = realizarDeposito(saldo);
+    break;
+    case 0:
+    printf("Saindo...\n");
+    break;
+    }
+
+
+
     
     return 0;
 }
+
